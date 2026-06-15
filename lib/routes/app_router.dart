@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/splash_screen.dart';
 import '../features/auth/presentation/welcome_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
+import '../features/auth/presentation/auth_method_screen.dart';
 import '../features/onboarding/presentation/questionnaire_screen.dart';
 import '../features/onboarding/presentation/onboarding_nav_screen.dart';
 import '../features/home/presentation/home_screen.dart';
@@ -16,6 +16,7 @@ import '../widgets/main_scaffold.dart';
 class AppRoutes {
   static const splash = '/';
   static const welcome = '/welcome';
+  static const authMethod = '/auth-method';
   static const login = '/login';
   static const register = '/register';
   static const questionnaire = '/questionnaire';
@@ -36,6 +37,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.welcome,
       builder: (_, __) => const WelcomeScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.authMethod,
+      builder: (_, __) => const AuthMethodScreen(),
     ),
     GoRoute(
       path: AppRoutes.login,
