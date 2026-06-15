@@ -1,0 +1,51 @@
+name: blog
+description: AI content producer for bloggers — Bloom AI
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Backend
+  supabase_flutter: ^2.8.4
+
+  # State management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Navigation
+  go_router: ^14.8.1
+
+  # Secure storage
+  flutter_secure_storage: ^9.2.2
+
+  # Animations
+  lottie: ^3.3.1
+  rive: ^0.13.20
+  flutter_animate: ^4.5.2
+  shimmer: ^3.0.0
+
+  # Images
+  cached_network_image: ^3.4.1
+
+  # Localisation & formatting
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.14
+  riverpod_generator: ^2.6.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/animations/
+    - assets/images/
