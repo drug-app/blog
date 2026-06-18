@@ -27,7 +27,7 @@ class ScanQuestionScreen extends ConsumerWidget {
       if (step + 1 < scanQuestions.length) {
         context.push(AppRoutes.scanStep(step + 1));
       } else {
-        context.push(AppRoutes.scanComplete);
+        context.push(AppRoutes.scanLoading);
       }
     }
 
@@ -100,6 +100,7 @@ class ScanQuestionScreen extends ConsumerWidget {
             child: _OptionCard(
               option: q.options[i],
               selected: selected.contains(i),
+              showIndicator: q.multi,
               onTap: () => ref.read(questionnaireProvider.notifier).toggle(
                   step, i,
                   multi: q.multi, max: q.maxSelect),
@@ -134,9 +135,13 @@ class ScanQuestionScreen extends ConsumerWidget {
 class _OptionCard extends StatelessWidget {
   final ScanOption option;
   final bool selected;
+  final bool showIndicator;
   final VoidCallback onTap;
   const _OptionCard(
-      {required this.option, required this.selected, required this.onTap});
+      {required this.option,
+      required this.selected,
+      required this.onTap,
+      this.showIndicator = false});
 
   @override
   Widget build(BuildContext context) {
@@ -163,21 +168,46 @@ class _OptionCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            Text(option.title,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary)),
-            if (option.subtitle != null) ...[
-              const SizedBox(height: 4),
-              Text(option.subtitle!,
-                  style: const TextStyle(
-                      fontSize: 13.5,
-                      color: AppColors.textSecondary,
-                      height: 1.3)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(option.title,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textPrimary)),
+                  if (option.subtitle != null) ...[
+                    const SizedBox(height: 4),
+                    Text(option.subtitle!,
+                        style: const TextStyle(
+                            fontSize: 13.5,
+                            color: AppColors.textSecondary,
+                            height: 1.3)),
+                  ],
+                ],
+              ),
+            ),
+            if (showIndicator) ...[
+              const SizedBox(width: 14),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: selected ? AppColors.pink : Colors.transparent,
+                  border: Border.all(
+                    color: selected ? AppColors.pink : AppColors.pinkLight,
+                    width: 2,
+                  ),
+                ),
+                child: selected
+                    ? const Icon(Icons.check, size: 16, color: Colors.white)
+                    : null,
+              ),
             ],
           ],
         ),

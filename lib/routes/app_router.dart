@@ -8,6 +8,7 @@ import '../features/auth/presentation/auth_method_screen.dart';
 import '../features/onboarding/presentation/name_screen.dart';
 import '../features/onboarding/presentation/scan_intro_screen.dart';
 import '../features/onboarding/presentation/scan_question_screen.dart';
+import '../features/onboarding/presentation/scan_loading_screen.dart';
 import '../features/onboarding/presentation/scan_complete_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/ideas/presentation/ideas_screen.dart';
@@ -23,6 +24,7 @@ class AppRoutes {
   static const register = '/register';
   static const name = '/onboarding/name';
   static const scanIntro = '/onboarding/scan-intro';
+  static const scanLoading = '/onboarding/scan-loading';
   static const scanComplete = '/onboarding/scan-complete';
   static String scanStep(int step) => '/onboarding/scan/$step';
   static const home = '/home';
@@ -67,6 +69,10 @@ final appRouter = GoRouter(
       builder: (_, state) => ScanQuestionScreen(
         step: int.tryParse(state.pathParameters['step'] ?? '0') ?? 0,
       ),
+    ),
+    GoRoute(
+      path: AppRoutes.scanLoading,
+      builder: (_, __) => const ScanLoadingScreen(),
     ),
     GoRoute(
       path: AppRoutes.scanComplete,
