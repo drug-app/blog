@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../routes/app_router.dart';
-import '../../../widgets/app_logo.dart';
+import '../../../widgets/animated_emblem.dart';
+import '../../../widgets/app_background.dart';
 import '../../../widgets/auth_text_field.dart';
 import '../../../widgets/glass_back_button.dart';
 import '../../../widgets/gradient_button.dart';
@@ -51,7 +52,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: Stack(
+        children: [
+          const AppBackground(),
+          SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Form(
@@ -63,7 +67,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: const [
                     GlassBackButton(),
                     Spacer(),
-                    AppLogo(size: 44),
+                    AnimatedEmblem(size: 44),
                     Spacer(),
                     SizedBox(width: 48),
                   ],
@@ -128,6 +132,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ),
         ),
+          ),
+        ],
       ),
     );
   }

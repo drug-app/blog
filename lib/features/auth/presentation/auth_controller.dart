@@ -45,11 +45,11 @@ class AuthController extends StateNotifier<AuthState> {
       _run(() => _ref.read(authRepositoryProvider).signInWithApple());
 
   Future<bool> _run(Future<void> Function() action) async {
+    // Демо-режим: пока ключи Supabase не добавлены, пропускаем пользователя
+    // дальше без реальной авторизации, чтобы можно было кликать весь флоу.
     if (!_ready) {
-      state = const AuthState(
-        error: 'Supabase ещё не подключён. Добавь ключи в app_constants.dart',
-      );
-      return false;
+      state = const AuthState();
+      return true;
     }
     state = const AuthState(loading: true);
     try {

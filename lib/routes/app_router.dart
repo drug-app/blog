@@ -5,8 +5,10 @@ import '../features/auth/presentation/welcome_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
 import '../features/auth/presentation/auth_method_screen.dart';
-import '../features/onboarding/presentation/questionnaire_screen.dart';
-import '../features/onboarding/presentation/onboarding_nav_screen.dart';
+import '../features/onboarding/presentation/name_screen.dart';
+import '../features/onboarding/presentation/scan_intro_screen.dart';
+import '../features/onboarding/presentation/scan_question_screen.dart';
+import '../features/onboarding/presentation/scan_complete_screen.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/ideas/presentation/ideas_screen.dart';
 import '../features/saved/presentation/saved_screen.dart';
@@ -19,8 +21,10 @@ class AppRoutes {
   static const authMethod = '/auth-method';
   static const login = '/login';
   static const register = '/register';
-  static const questionnaire = '/questionnaire';
-  static const onboardingNav = '/onboarding-nav';
+  static const name = '/onboarding/name';
+  static const scanIntro = '/onboarding/scan-intro';
+  static const scanComplete = '/onboarding/scan-complete';
+  static String scanStep(int step) => '/onboarding/scan/$step';
   static const home = '/home';
   static const ideas = '/ideas';
   static const saved = '/saved';
@@ -51,12 +55,22 @@ final appRouter = GoRouter(
       builder: (_, __) => const RegisterScreen(),
     ),
     GoRoute(
-      path: AppRoutes.questionnaire,
-      builder: (_, __) => const QuestionnaireScreen(),
+      path: AppRoutes.name,
+      builder: (_, __) => const NameScreen(),
     ),
     GoRoute(
-      path: AppRoutes.onboardingNav,
-      builder: (_, __) => const OnboardingNavScreen(),
+      path: AppRoutes.scanIntro,
+      builder: (_, __) => const ScanIntroScreen(),
+    ),
+    GoRoute(
+      path: '/onboarding/scan/:step',
+      builder: (_, state) => ScanQuestionScreen(
+        step: int.tryParse(state.pathParameters['step'] ?? '0') ?? 0,
+      ),
+    ),
+    GoRoute(
+      path: AppRoutes.scanComplete,
+      builder: (_, __) => const ScanCompleteScreen(),
     ),
     ShellRoute(
       builder: (_, __, child) => MainScaffold(child: child),

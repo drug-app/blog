@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../routes/app_router.dart';
 import '../../../widgets/animated_emblem.dart';
+import '../../../widgets/app_background.dart';
 import '../../../widgets/gradient_button.dart';
 import 'widgets/welcome_hero.dart';
 
@@ -15,7 +16,10 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
+      body: Stack(
+        children: [
+          const AppBackground(),
+          SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
           child: Column(
@@ -82,6 +86,8 @@ class WelcomeScreen extends StatelessWidget {
             ],
           ),
         ),
+          ),
+        ],
       ),
     );
   }
